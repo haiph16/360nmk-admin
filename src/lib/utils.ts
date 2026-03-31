@@ -1,8 +1,19 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
+import { useAuthStore } from '@/stores/auth-store'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
+}
+
+export function hasPermission(permissionSlug: string) {
+  const { auth } = useAuthStore.getState()
+  if (!auth.user) return false
+
+  // Admin has all permissions
+  if (auth.user.role.slug === 'admin') return true
+
+  return auth.user.role.permissions.some((p) => p.slug === permissionSlug)
 }
 
 export function sleep(ms: number = 1000) {

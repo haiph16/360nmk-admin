@@ -13,6 +13,8 @@ import { handleServerError } from '@/lib/handle-server-error'
 import { DirectionProvider } from './context/direction-provider'
 import { FontProvider } from './context/font-provider'
 import { ThemeProvider } from './context/theme-provider'
+// i18n
+import './lib/i18n'
 // Generated Routes
 import { routeTree } from './routeTree.gen'
 // Styles
@@ -52,10 +54,15 @@ const queryClient = new QueryClient({
     onError: (error) => {
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {
-          toast.error('Session expired!')
-          useAuthStore.getState().auth.reset()
-          const redirect = `${router.history.location.href}`
-          router.navigate({ to: '/sign-in', search: { redirect } })
+          const isAuthRequest = error.config?.url?.includes('/auth/')
+          const isSignInPage = window.location.pathname.includes('/sign-in')
+
+          if (!isAuthRequest && !isSignInPage) {
+            toast.error('Session expired!')
+            useAuthStore.getState().auth.reset()
+            const redirect = `${router.history.location.href}`
+            router.navigate({ to: '/sign-in', search: { redirect } })
+          }
         }
         if (error.response?.status === 500) {
           toast.error('Internal Server Error!')
