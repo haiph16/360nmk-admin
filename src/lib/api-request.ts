@@ -67,7 +67,7 @@ export async function apiPut<T = any>(
     ...(token && { Authorization: `Bearer ${token}` }),
   }
 
-  const response = await api.put(url, data, {
+  const response = await api.patch(url, data, {
     ...options,
     headers,
   })

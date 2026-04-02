@@ -8,7 +8,7 @@ export interface Role {
   id: string
   name: string
   description: string | null
-  permissions?: { id: string; slug: string; name: string }[]
+  permissions?: { id: string; name: string }[]
   createdAt: string
   updatedAt: string
 }

@@ -6,14 +6,37 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function hasPermission(permissionSlug: string) {
+export function hasPermission(permissionName?: string): boolean {
   const { auth } = useAuthStore.getState()
   if (!auth.user) return false
 
-  // Admin has all permissions
-  if (auth.user.role.slug === 'admin') return true
+  // Admin (id === 1 or id === '1') has all permissions
+  if (auth.user.id === '1') {
+    return true
+  }
 
-  return auth.user.role.permissions.some((p) => p.slug === permissionSlug)
+  // If no specific permission is required, user is authenticated
+  if (!permissionName) return true
+
+  // Check if user has the required permission
+  if (
+    auth.user.role?.permissions &&
+    Array.isArray(auth.user.role.permissions)
+  ) {
+    return auth.user.role.permissions.some((permission) => {
+      // Handle both string and object permissions
+      if (typeof permission === 'string') {
+        return permission === permissionName
+      }
+      return (
+        permission.name === permissionName || permission.slug === permissionName
+      )
+    })
+  }
+
+  // If user is authenticated but no permissions loaded yet, allow access
+  // (permissions might still be loading)
+  return false
 }
 
 export function sleep(ms: number = 1000) {

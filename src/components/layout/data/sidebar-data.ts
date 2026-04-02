@@ -1,26 +1,11 @@
 import {
-  // Construction,
-  // LayoutDashboard,
-  // Monitor,
-  // Bug,
-  // ListTodo,
-  // FileX,
-  // HelpCircle,
-  // Bell,
-  Package,
-  // Palette,
-  // ServerOff,
-  // Settings,
   Wrench,
-  // UserCog,
-  // UserX,
-  Users,
-  // MessagesSquare,
   MapPin,
-  Phone,
-  Globe,
-  BookOpen,
   Eye,
+  Layout,
+  Layers,
+  Building2,
+  Settings,
   AudioWaveform,
   Command,
   GalleryVerticalEnd,
@@ -56,198 +41,46 @@ export const sidebarData: SidebarData = {
       title: 'General',
       items: [
         // {
-        //   title: 'Dashboard',
-        //   url: '/',
-        //   icon: LayoutDashboard,
+        //   title: 'Users',
+        //   url: '/users',
+        //   icon: Users,
         // },
-        // {
-        //   title: 'Tasks',
-        //   url: '/tasks',
-        //   icon: ListTodo,
-        // },
-        // {
-        //   title: 'Apps',
-        //   url: '/apps',
-        //   icon: Package,
-        // },
-        // {
-        //   title: 'Chats',
-        //   url: '/chats',
-        //   badge: '3',
-        //   icon: MessagesSquare,
-        // },
-        {
-          title: 'Users',
-          url: '/users',
-          icon: Users,
-        },
         {
           title: 'Overviews',
           url: '/overviews',
-          icon: BookOpen,
-        },
-        {
-          title: 'Products',
-          url: '/products',
-          icon: Package,
-        },
-        {
-          title: 'Utilities',
-          url: '/utilities',
-          icon: Wrench,
-        },
-        {
-          title: 'Locations',
-          url: '/locations',
-          icon: MapPin,
-        },
-        {
-          title: 'Contacts',
-          url: '/contacts',
-          icon: Phone,
-        },
-        {
-          title: 'Virtual Scenes',
-          url: '/virtual-scenes',
-          icon: Globe,
-        },
-        {
-          title: 'Views',
-          url: '/views',
           icon: Eye,
         },
         {
-          title: 'Management Contents',
-          url: '/management-contents',
-          icon: BookOpen,
+          title: 'Region Links',
+          url: '/region-links',
+          icon: MapPin,
         },
-        // {
-        //   title: 'Permissions',
-        //   url: '/permissions',
-        //   icon: Lock,
-        // },
-        // {
-        //   title: 'Secured by Clerk',
-        //   icon: ClerkLogo,
-        //   items: [
-        //     {
-        //       title: 'Sign In',
-        //       url: '/clerk/sign-in',
-        //     },
-        //     {
-        //       title: 'Sign Up',
-        //       url: '/clerk/sign-up',
-        //     },
-        //     {
-        //       title: 'User Management',
-        //       url: '/clerk/user-management',
-        //     },
-        //   ],
-        // },
+        {
+          title: 'Utility Premises',
+          url: '/utility-premises',
+          icon: Wrench,
+        },
+        {
+          title: 'Typical Layouts',
+          url: '/typical-layouts',
+          icon: Layout,
+        },
+        {
+          title: 'Floor Plan',
+          url: '/floor-plan',
+          icon: Layers,
+        },
+        {
+          title: 'Apartment Interiors',
+          url: '/apartment-interiors',
+          icon: Building2,
+        },
+        {
+          title: 'Other Info',
+          url: '/other-info',
+          icon: Settings,
+        },
       ],
     },
-    // {
-    //   title: 'Pages',
-    //   items: [
-    //     {
-    //       title: 'Auth',
-    //       icon: ShieldCheck,
-    //       items: [
-    //         {
-    //           title: 'Sign In',
-    //           url: '/sign-in',
-    //         },
-    //         {
-    //           title: 'Sign In (2 Col)',
-    //           url: '/sign-in-2',
-    //         },
-    //         {
-    //           title: 'Sign Up',
-    //           url: '/sign-up',
-    //         },
-    //         {
-    //           title: 'Forgot Password',
-    //           url: '/forgot-password',
-    //         },
-    //         {
-    //           title: 'OTP',
-    //           url: '/otp',
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       title: 'Errors',
-    //       icon: Bug,
-    //       items: [
-    //         {
-    //           title: 'Unauthorized',
-    //           url: '/errors/unauthorized',
-    //           icon: Lock,
-    //         },
-    //         {
-    //           title: 'Forbidden',
-    //           url: '/errors/forbidden',
-    //           icon: UserX,
-    //         },
-    //         {
-    //           title: 'Not Found',
-    //           url: '/errors/not-found',
-    //           icon: FileX,
-    //         },
-    //         {
-    //           title: 'Internal Server Error',
-    //           url: '/errors/internal-server-error',
-    //           icon: ServerOff,
-    //         },
-    //         {
-    //           title: 'Maintenance Error',
-    //           url: '/errors/maintenance-error',
-    //           icon: Construction,
-    //         },
-    //       ],
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: 'Other',
-    //   items: [
-    //     {
-    //       title: 'Settings',
-    //       icon: Settings,
-    //       items: [
-    //         {
-    //           title: 'Profile',
-    //           url: '/settings',
-    //           icon: UserCog,
-    //         },
-    //         {
-    //           title: 'Account',
-    //           url: '/settings/account',
-    //           icon: Wrench,
-    //         },
-    //         {
-    //           title: 'Appearance',
-    //           url: '/settings/appearance',
-    //           icon: Palette,
-    //         },
-    //         {
-    //           title: 'Notifications',
-    //           url: '/settings/notifications',
-    //           icon: Bell,
-    //         },
-    //         {
-    //           title: 'Display',
-    //           url: '/settings/display',
-    //           icon: Monitor,
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       title: 'Help Center',
-    //       url: '/help-center',
-    //       icon: HelpCircle,
-    //     },
-    //   ],
-    // },
   ],
 }

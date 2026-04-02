@@ -92,9 +92,6 @@ export function RolePermissionsDialog({
                       >
                         {permission.name}
                       </label>
-                      <span className='text-xs text-muted-foreground'>
-                        {permission.slug}
-                      </span>
                     </div>
                   </div>
                 ))}

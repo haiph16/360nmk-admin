@@ -39,7 +39,6 @@ export function PermissionsActionDialog({
 
   const formSchema = z.object({
     name: z.string().min(1, t('field_required', { field: t('name') })),
-    slug: z.string().min(1, t('field_required', { field: t('slug') })),
     description: z.string().optional(),
   })
 
@@ -50,12 +49,10 @@ export function PermissionsActionDialog({
     defaultValues: isEdit
       ? {
           name: currentRow.name,
-          slug: currentRow.slug,
           description: currentRow.description || '',
         }
       : {
           name: '',
-          slug: '',
           description: '',
         },
   })
@@ -112,19 +109,6 @@ export function PermissionsActionDialog({
                   <FormLabel>{t('name')}</FormLabel>
                   <FormControl>
                     <Input placeholder={t('name')} {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name='slug'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('slug')}</FormLabel>
-                  <FormControl>
-                    <Input placeholder={t('slug')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

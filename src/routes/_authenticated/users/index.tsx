@@ -5,8 +5,8 @@ import { Users } from '@/features/users'
 import { roles } from '@/features/users/data/data'
 
 const usersSearchSchema = z.object({
-  page: z.number().optional().catch(1),
-  pageSize: z.number().optional().catch(10),
+  page: z.coerce.number().int().positive().optional().default(1),
+  pageSize: z.coerce.number().int().positive().optional().default(10),
   // Facet filters
   status: z
     .array(
@@ -28,11 +28,11 @@ const usersSearchSchema = z.object({
 })
 
 export const Route = createFileRoute('/_authenticated/users/')({
-  beforeLoad: () => {
+  beforeLoad: async () => {
     if (!hasPermission('user_read')) {
-      throw redirect({ to: '/403' })
+      throw redirect({ to: '/sign-in' })
     }
   },
-  validateSearch: usersSearchSchema,
+  validateSearch: (search) => usersSearchSchema.parse(search),
   component: Users,
 })

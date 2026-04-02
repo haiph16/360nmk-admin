@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { getCookie, setCookie, removeCookie } from '@/lib/cookies'
 
-const ACCESS_TOKEN = 'shadcn-admin-access-token'
+const accesstoken = 'shadcn-admin-access-token'
 const REFRESH_TOKEN = 'shadcn-admin-refresh-token'
 const USER_DATA = 'shadcn-admin-user-data'
 const REMEMBER_ME = 'shadcn-admin-remember-me'
@@ -37,7 +37,7 @@ interface AuthState {
 }
 
 export const useAuthStore = create<AuthState>()((set) => {
-  const cookieToken = getCookie(ACCESS_TOKEN)
+  const cookieToken = getCookie(accesstoken)
   const cookieRefreshToken = getCookie(REFRESH_TOKEN)
   const cookieUser = getCookie(USER_DATA)
   const cookieRememberMe = getCookie(REMEMBER_ME)
@@ -47,17 +47,9 @@ export const useAuthStore = create<AuthState>()((set) => {
   let initUser: AuthUser | null = null
   let initRememberMe = false
 
-  try {
-    initToken = cookieToken ? JSON.parse(cookieToken) : ''
-  } catch (_e) {
-    // Failed to parse token cookie
-  }
-
-  try {
-    initRefreshToken = cookieRefreshToken ? JSON.parse(cookieRefreshToken) : ''
-  } catch (_e) {
-    // Failed to parse refresh token cookie
-  }
+  // Tokens are plain strings, not JSON-encoded
+  initToken = cookieToken || ''
+  initRefreshToken = cookieRefreshToken || ''
 
   try {
     initUser = cookieUser ? JSON.parse(cookieUser) : null
@@ -89,7 +81,7 @@ export const useAuthStore = create<AuthState>()((set) => {
         set((state) => {
           // Refresh token typically has longer expiry
           const maxAge = 60 * 60 * 24 * 30 // 30 days
-          setCookie(REFRESH_TOKEN, JSON.stringify(refreshToken), maxAge)
+          setCookie(REFRESH_TOKEN, refreshToken, maxAge)
           return { ...state, auth: { ...state.auth, refreshToken } }
         }),
       rememberMe: initRememberMe,
@@ -103,7 +95,7 @@ export const useAuthStore = create<AuthState>()((set) => {
           const shouldRemember = rememberMe ?? state.auth.rememberMe
           // Use 30 days if rememberMe, else 7 days
           const maxAge = shouldRemember ? 60 * 60 * 24 * 30 : 60 * 60 * 24 * 7
-          setCookie(ACCESS_TOKEN, JSON.stringify(accessToken), maxAge)
+          setCookie(accesstoken, accessToken, maxAge)
           if (rememberMe !== undefined) {
             setCookie(REMEMBER_ME, JSON.stringify(rememberMe))
           }
@@ -118,12 +110,12 @@ export const useAuthStore = create<AuthState>()((set) => {
         }),
       resetAccessToken: () =>
         set((state) => {
-          removeCookie(ACCESS_TOKEN)
+          removeCookie(accesstoken)
           return { ...state, auth: { ...state.auth, accessToken: '' } }
         }),
       reset: () =>
         set((state) => {
-          removeCookie(ACCESS_TOKEN)
+          removeCookie(accesstoken)
           removeCookie(REFRESH_TOKEN)
           removeCookie(USER_DATA)
           removeCookie(REMEMBER_ME)

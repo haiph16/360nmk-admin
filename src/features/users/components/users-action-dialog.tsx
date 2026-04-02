@@ -155,7 +155,6 @@ export function UsersActionDialog({
           username: currentRow.username,
           phoneNumber: currentRow.phoneNumber || '',
           email: currentRow.email,
-          role: currentRow.role?.slug || '',
           password: '',
           confirmPassword: '',
           isEdit,

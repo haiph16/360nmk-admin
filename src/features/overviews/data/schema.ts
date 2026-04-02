@@ -1,22 +1,16 @@
-export type Overview = {
-  id: number
-  title: string
-  content: string
-  media_id: number | null
-  media?: {
-    id: number
-    urls?: {
-      large?: string
-      medium?: string
-      thumbnail?: string
-    }
-  }
-  createdAt: string
-  updatedAt: string
-}
+import { z } from 'zod'
 
-export type CompanyInfo = {
-  id: number
-  name: string
-  hotline: string
+export const overviewSchema = z.object({
+  id: z.number().default(1),
+  link_360: z.string().optional().nullable(),
+  updatedAt: z.string(),
+})
+
+export type Overview = z.infer<typeof overviewSchema>
+export type OverviewCreatePayload = Pick<Overview, 'link_360'>
+
+export type OverviewResponse = {
+  success: boolean
+  message: string
+  data: Overview
 }

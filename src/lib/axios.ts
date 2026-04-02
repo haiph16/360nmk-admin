@@ -6,7 +6,7 @@ interface CustomInternalAxiosRequestConfig extends InternalAxiosRequestConfig {
 }
 const baseURL = import.meta.env.VITE_API_URL
 const api = axios.create({
-  baseURL: `${baseURL}/api`,
+  baseURL: `${baseURL}`,
   // withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
@@ -84,16 +84,16 @@ api.interceptors.response.use(
         const response = await axios.post(
           `${api.defaults.baseURL}/auth/refresh`,
           {
-            refresh_token: refreshToken,
+            refreshtoken: refreshToken,
           }
         )
 
-        const { access_token } = response.data.data
+        const { accesstoken } = response.data.data
         const { rememberMe } = useAuthStore.getState().auth
-        useAuthStore.getState().auth.setAccessToken(access_token, rememberMe)
+        useAuthStore.getState().auth.setAccessToken(accesstoken, rememberMe)
 
-        processQueue(null, access_token)
-        originalRequest.headers['Authorization'] = 'Bearer ' + access_token
+        processQueue(null, accesstoken)
+        originalRequest.headers['Authorization'] = 'Bearer ' + accesstoken
         return api(originalRequest)
       } catch (refreshError) {
         processQueue(refreshError, null)

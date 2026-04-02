@@ -30,15 +30,6 @@ export const getRolesColumns = ({
     ),
   },
   {
-    accessorKey: 'slug',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title={t('slug')} />
-    ),
-    cell: ({ row }) => (
-      <div className='font-mono text-xs'>{row.getValue('slug')}</div>
-    ),
-  },
-  {
     accessorKey: 'description',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title={t('description')} />

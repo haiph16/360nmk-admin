@@ -1,13 +1,16 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { apiGet, apiPut } from '@/lib/api-request'
-import type { Overview, CompanyInfo } from '../data/schema'
+import { AxiosError } from 'axios'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { toast } from 'sonner'
+import api from '@/lib/axios'
+import type { OverviewCreatePayload, OverviewResponse } from '../data/schema'
 
-export function useOverviewsList() {
+// ============== Overview ==============
+export function useOverview() {
   return useQuery({
     queryKey: ['overview'],
     queryFn: async () => {
-      const response = await apiGet('/overview')
-      return response.data as Overview
+      const response = await api.get<OverviewResponse>('/overview')
+      return response.data.data
     },
   })
 }
@@ -16,36 +19,20 @@ export function useUpdateOverview() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async (overview: Omit<Overview, 'createdAt' | 'updatedAt'>) => {
-      const response = await apiPut(`/overview`, overview)
-      return response.data as Overview
+    mutationFn: async (data: OverviewCreatePayload) => {
+      const response = await api.patch<OverviewResponse>('/overview', data)
+      return response.data.data
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['overview'] })
+      toast.success('Overview updated successfully')
     },
-  })
-}
-
-export function useCompanyInfo() {
-  return useQuery({
-    queryKey: ['companyInfo'],
-    queryFn: async () => {
-      const response = await apiGet('/company-info')
-      return response.data as CompanyInfo
-    },
-  })
-}
-
-export function useUpdateCompanyInfo() {
-  const queryClient = useQueryClient()
-
-  return useMutation({
-    mutationFn: async (companyInfo: Omit<CompanyInfo, 'id'>) => {
-      const response = await apiPut('/company-info', companyInfo)
-      return response.data as CompanyInfo
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['companyInfo'] })
+    onError: (error) => {
+      const message =
+        error instanceof AxiosError
+          ? error.response?.data?.message
+          : 'Failed to update overview'
+      toast.error(message || 'Error updating overview')
     },
   })
 }

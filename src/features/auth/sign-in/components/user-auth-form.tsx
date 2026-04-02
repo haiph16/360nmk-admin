@@ -65,36 +65,48 @@ export function UserAuthForm({
 
       console.log('Login response:', response)
 
-      const { access_token, refresh_token } = response.data.data
+      const { accessToken, refreshToken } = response.data.data
 
-      if (!access_token || !refresh_token) {
+      if (!accessToken || !refreshToken) {
         throw new Error('Missing tokens in response')
       }
 
       // Decode JWT to extract user info
-      const decodedToken = decodeJWT(access_token)
+      const decodedToken = decodeJWT(accessToken)
       console.log('Decoded token:', decodedToken)
 
       if (!decodedToken) {
         throw new Error('Invalid access token')
       }
 
-      // Create a minimal user object from JWT payload
+      // Create a user object from JWT payload with permissions
       const user = {
-        id: decodedToken.user_id?.toString() || '0',
-        email: data.email,
-        username: data.email.split('@')[0], // Use email prefix as username
+        id:
+          decodedToken.user_id?.toString() ||
+          decodedToken.sub?.toString() ||
+          '0',
+        email: decodedToken.email || data.email,
+        username: decodedToken.username || data.email.split('@')[0],
         role: {
           name: decodedToken.role || 'user',
           slug: decodedToken.role || 'user',
-          permissions: [],
+          // Extract permissions from JWT token (array of permission names)
+          permissions:
+            (decodedToken.permissions || []).map(
+              (perm: string | { id: string; name: string; slug: string }) => {
+                if (typeof perm === 'string') {
+                  return { id: perm, name: perm, slug: perm }
+                }
+                return perm
+              }
+            ) || [],
         },
       }
 
       // Set user, tokens, and remember me preference in store
       auth.setUser(user)
-      auth.setAccessToken(access_token, data.rememberMe)
-      auth.setRefreshToken(refresh_token)
+      auth.setAccessToken(accessToken, data.rememberMe)
+      auth.setRefreshToken(refreshToken)
       auth.setRememberMe(data.rememberMe)
 
       toast.success(t('welcome_back', { name: user.username || user.email }))

@@ -1,7 +1,6 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
-import { apiUploadFile } from '@/lib/api-request'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -11,7 +10,6 @@ import {
   DialogFooter,
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
-import { ImageUpload } from '@/components/image-upload'
 import type { Overview } from '../data/schema'
 import { useUpdateOverview } from '../hooks/use-overviews'
 import { useOverviewsContext } from './overviews-provider'
@@ -31,37 +29,17 @@ export function OverviewsEditDialog({
   const { setOpen, setCurrentOverview } = useOverviewsContext()
   const updateOverview = useUpdateOverview()
 
-  const [title, setTitle] = useState(currentOverview?.title || '')
-  const [content, setContent] = useState(currentOverview?.content || '')
-  const [mediaId] = useState(currentOverview?.media_id || 0)
-  const pendingFileRef = useRef<File | null>(null)
+  const [link360, setLink360] = useState(currentOverview?.link_360 || '')
 
   const handleSave = async () => {
-    if (!currentOverview) return
-
     try {
-      let finalMediaId: number | null = mediaId
-
-      // Upload ảnh tại đây, đúng lúc submit
-      if (pendingFileRef.current) {
-        const response = await apiUploadFile(
-          '/media/upload',
-          pendingFileRef.current
-        )
-        finalMediaId = response.data?.id ?? response.id ?? null
-      }
-
       await updateOverview.mutateAsync({
-        id: currentOverview.id,
-        title,
-        content,
-        media_id: finalMediaId,
+        link_360: link360 || null,
       })
       toast.success(t('save_success') || 'Saved successfully')
       onOpenChange(false)
       setOpen(null)
       setCurrentOverview(null)
-      pendingFileRef.current = null
     } catch (err) {
       toast.error(t('save_error') || 'Error occurred')
     }
@@ -69,7 +47,7 @@ export function OverviewsEditDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className='max-h-[90vh] max-w-4xl overflow-y-auto'>
+      <DialogContent className='max-w-lg'>
         <DialogHeader>
           <DialogTitle>{t('edit') || 'Edit'} Overview</DialogTitle>
         </DialogHeader>
@@ -77,37 +55,17 @@ export function OverviewsEditDialog({
         <div className='space-y-4'>
           <div>
             <label className='mb-2 block text-sm font-medium'>
-              {t('title') || 'Title'}
+              {t('link_360') || '360° Link'}
             </label>
             <Input
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder='Enter overview title'
+              value={link360}
+              onChange={(e) => setLink360(e.target.value)}
+              placeholder='https://example.com/360'
+              type='url'
             />
-          </div>
-
-          <div>
-            <label className='mb-2 block text-sm font-medium'>
-              {t('image') || 'Image'}
-            </label>
-            <ImageUpload
-              onFileSelect={(file) => {
-                pendingFileRef.current = file
-              }}
-              isDisabled={updateOverview.isPending}
-            />
-          </div>
-
-          <div>
-            <label className='mb-2 block text-sm font-medium'>
-              {t('content') || 'Content'}
-            </label>
-            <textarea
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              placeholder='Enter overview content (HTML supported)'
-              className='min-h-80 w-full rounded-lg border border-input bg-background px-3 py-2 text-base text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:outline-none'
-            />
+            <p className='mt-1 text-xs text-muted-foreground'>
+              {t('enter_360_link') || 'Enter the URL to the 360° content'}
+            </p>
           </div>
         </div>
 

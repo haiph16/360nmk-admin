@@ -1,4 +1,3 @@
-import { getRouteApi } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import { ConfigDrawer } from '@/components/config-drawer'
 import { Header } from '@/components/layout/header'
@@ -9,16 +8,9 @@ import { ThemeSwitch } from '@/components/theme-switch'
 import { UsersDialogs } from './components/users-dialogs'
 import { UsersPrimaryButtons } from './components/users-primary-buttons'
 import { UsersProvider } from './components/users-provider'
-import { UsersTable } from './components/users-table'
-import { useUsers } from './hooks/use-users'
-
-const route = getRouteApi('/_authenticated/users/')
 
 export function Users() {
   const { t } = useTranslation()
-  const search = route.useSearch()
-  const navigate = route.useNavigate()
-  const { data, isLoading, isError } = useUsers()
 
   return (
     <UsersProvider>
@@ -41,12 +33,6 @@ export function Users() {
           </div>
           <UsersPrimaryButtons />
         </div>
-
-        {isLoading && <div>{t('loading')}</div>}
-        {isError && <div>{t('error')}</div>}
-        {!isLoading && !isError && (
-          <UsersTable data={data ?? []} search={search} navigate={navigate} />
-        )}
       </Main>
 
       <UsersDialogs />

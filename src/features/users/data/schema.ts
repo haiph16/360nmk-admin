@@ -18,7 +18,6 @@ const userSchema = z.object({
   role: z
     .object({
       name: z.string(),
-      slug: z.string(),
     })
     .nullable(),
   createdAt: z.coerce.date(),

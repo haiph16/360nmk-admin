@@ -1,18 +1,14 @@
 import React, { useState } from 'react'
 import useDialogState from '@/hooks/use-dialog-state'
-import type { Overview, CompanyInfo } from '../data/schema'
+import type { Overview } from '../data/schema'
 
-type OverviewsDialogType = 'edit' | 'edit-company' | 'view'
+type OverviewsDialogType = 'edit' | 'view'
 
 type OverviewsContextType = {
   open: OverviewsDialogType | null
   setOpen: (str: OverviewsDialogType | null) => void
   currentOverview: Overview | null
   setCurrentOverview: React.Dispatch<React.SetStateAction<Overview | null>>
-  currentCompanyInfo: CompanyInfo | null
-  setCurrentCompanyInfo: React.Dispatch<
-    React.SetStateAction<CompanyInfo | null>
-  >
 }
 
 const OverviewsContext = React.createContext<OverviewsContextType | null>(null)
@@ -20,8 +16,6 @@ const OverviewsContext = React.createContext<OverviewsContextType | null>(null)
 export function OverviewsProvider({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useDialogState<OverviewsDialogType>(null)
   const [currentOverview, setCurrentOverview] = useState<Overview | null>(null)
-  const [currentCompanyInfo, setCurrentCompanyInfo] =
-    useState<CompanyInfo | null>(null)
 
   return (
     <OverviewsContext.Provider
@@ -30,8 +24,6 @@ export function OverviewsProvider({ children }: { children: React.ReactNode }) {
         setOpen,
         currentOverview,
         setCurrentOverview,
-        currentCompanyInfo,
-        setCurrentCompanyInfo,
       }}
     >
       {children}

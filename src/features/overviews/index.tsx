@@ -8,16 +8,11 @@ import { ThemeSwitch } from '@/components/theme-switch'
 import { OverviewsDialogs } from './components/overviews-dialogs'
 import { OverviewsProvider } from './components/overviews-provider'
 import { OverviewsView } from './components/overviews-view'
-import { useOverviewsList, useCompanyInfo } from './hooks/use-overviews'
+import { useOverview } from './hooks/use-overviews'
 
 export function Overviews() {
   const { t } = useTranslation()
-  const { data, isLoading, isError } = useOverviewsList()
-  const {
-    data: companyInfo,
-    isLoading: isLoadingCompanyInfo,
-    isError: isErrorCompanyInfo,
-  } = useCompanyInfo()
+  const { data, isLoading, isError } = useOverview()
 
   return (
     <OverviewsProvider>
@@ -37,25 +32,20 @@ export function Overviews() {
               {t('overviews') || 'Overviews'}
             </h2>
             <p className='text-muted-foreground'>
-              {t('overviews_desc') || 'Manage your overview content'}
+              {t('manage_360_content') || 'Manage your 360° content'}
             </p>
           </div>
         </div>
 
-        {(isLoading || isLoadingCompanyInfo) && <div>{t('loading')}</div>}
-        {(isError || isErrorCompanyInfo) && <div>{t('error')}</div>}
-        {!isLoading &&
-          !isError &&
-          !isLoadingCompanyInfo &&
-          !isErrorCompanyInfo && (
-            <OverviewsView
-              overview={data ?? null}
-              companyInfo={companyInfo ?? null}
-            />
-          )}
+        {isLoading && <div>{t('loading')}</div>}
+        {isError && <div>{t('error')}</div>}
+        {!isLoading && !isError && <OverviewsView overview={data ?? null} />}
       </Main>
 
       <OverviewsDialogs />
     </OverviewsProvider>
   )
 }
+
+export * from './hooks/use-overviews'
+export * from './data/schema'

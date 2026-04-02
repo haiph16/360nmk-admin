@@ -7,7 +7,6 @@ import api from '@/lib/axios'
 export interface Permission {
   id: string
   name: string
-  slug: string
   description: string | null
   createdAt: string
   updatedAt: string

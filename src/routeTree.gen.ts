@@ -23,15 +23,15 @@ import { Route as authOtpRouteImport } from './routes/(auth)/otp'
 import { Route as authForgotPasswordRouteImport } from './routes/(auth)/forgot-password'
 import { Route as AuthenticatedVirtualScenesIndexRouteImport } from './routes/_authenticated/virtual-scenes/index'
 import { Route as AuthenticatedViewsIndexRouteImport } from './routes/_authenticated/views/index'
-import { Route as AuthenticatedUtilitiesIndexRouteImport } from './routes/_authenticated/utilities/index'
+import { Route as AuthenticatedUtilityPremisesIndexRouteImport } from './routes/_authenticated/utility-premises/index'
 import { Route as AuthenticatedUsersIndexRouteImport } from './routes/_authenticated/users/index'
-import { Route as AuthenticatedRolesIndexRouteImport } from './routes/_authenticated/roles/index'
-import { Route as AuthenticatedProductsIndexRouteImport } from './routes/_authenticated/products/index'
+import { Route as AuthenticatedTypicalLayoutsIndexRouteImport } from './routes/_authenticated/typical-layouts/index'
+import { Route as AuthenticatedRegionLinksIndexRouteImport } from './routes/_authenticated/region-links/index'
 import { Route as AuthenticatedPermissionsIndexRouteImport } from './routes/_authenticated/permissions/index'
 import { Route as AuthenticatedOverviewsIndexRouteImport } from './routes/_authenticated/overviews/index'
-import { Route as AuthenticatedManagementContentsIndexRouteImport } from './routes/_authenticated/management-contents/index'
-import { Route as AuthenticatedLocationsIndexRouteImport } from './routes/_authenticated/locations/index'
-import { Route as AuthenticatedContactsIndexRouteImport } from './routes/_authenticated/contacts/index'
+import { Route as AuthenticatedOtherInfoIndexRouteImport } from './routes/_authenticated/other-info/index'
+import { Route as AuthenticatedFloorPlanIndexRouteImport } from './routes/_authenticated/floor-plan/index'
+import { Route as AuthenticatedApartmentInteriorsIndexRouteImport } from './routes/_authenticated/apartment-interiors/index'
 
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
@@ -103,10 +103,10 @@ const AuthenticatedViewsIndexRoute = AuthenticatedViewsIndexRouteImport.update({
   path: '/views/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedUtilitiesIndexRoute =
-  AuthenticatedUtilitiesIndexRouteImport.update({
-    id: '/utilities/',
-    path: '/utilities/',
+const AuthenticatedUtilityPremisesIndexRoute =
+  AuthenticatedUtilityPremisesIndexRouteImport.update({
+    id: '/utility-premises/',
+    path: '/utility-premises/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexRouteImport.update({
@@ -114,15 +114,16 @@ const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexRouteImport.update({
   path: '/users/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedRolesIndexRoute = AuthenticatedRolesIndexRouteImport.update({
-  id: '/roles/',
-  path: '/roles/',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedProductsIndexRoute =
-  AuthenticatedProductsIndexRouteImport.update({
-    id: '/products/',
-    path: '/products/',
+const AuthenticatedTypicalLayoutsIndexRoute =
+  AuthenticatedTypicalLayoutsIndexRouteImport.update({
+    id: '/typical-layouts/',
+    path: '/typical-layouts/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedRegionLinksIndexRoute =
+  AuthenticatedRegionLinksIndexRouteImport.update({
+    id: '/region-links/',
+    path: '/region-links/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedPermissionsIndexRoute =
@@ -137,22 +138,22 @@ const AuthenticatedOverviewsIndexRoute =
     path: '/overviews/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedManagementContentsIndexRoute =
-  AuthenticatedManagementContentsIndexRouteImport.update({
-    id: '/management-contents/',
-    path: '/management-contents/',
+const AuthenticatedOtherInfoIndexRoute =
+  AuthenticatedOtherInfoIndexRouteImport.update({
+    id: '/other-info/',
+    path: '/other-info/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedLocationsIndexRoute =
-  AuthenticatedLocationsIndexRouteImport.update({
-    id: '/locations/',
-    path: '/locations/',
+const AuthenticatedFloorPlanIndexRoute =
+  AuthenticatedFloorPlanIndexRouteImport.update({
+    id: '/floor-plan/',
+    path: '/floor-plan/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedContactsIndexRoute =
-  AuthenticatedContactsIndexRouteImport.update({
-    id: '/contacts/',
-    path: '/contacts/',
+const AuthenticatedApartmentInteriorsIndexRoute =
+  AuthenticatedApartmentInteriorsIndexRouteImport.update({
+    id: '/apartment-interiors/',
+    path: '/apartment-interiors/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
@@ -168,15 +169,15 @@ export interface FileRoutesByFullPath {
   '/404': typeof errors404Route
   '/500': typeof errors500Route
   '/503': typeof errors503Route
-  '/contacts/': typeof AuthenticatedContactsIndexRoute
-  '/locations/': typeof AuthenticatedLocationsIndexRoute
-  '/management-contents/': typeof AuthenticatedManagementContentsIndexRoute
+  '/apartment-interiors/': typeof AuthenticatedApartmentInteriorsIndexRoute
+  '/floor-plan/': typeof AuthenticatedFloorPlanIndexRoute
+  '/other-info/': typeof AuthenticatedOtherInfoIndexRoute
   '/overviews/': typeof AuthenticatedOverviewsIndexRoute
   '/permissions/': typeof AuthenticatedPermissionsIndexRoute
-  '/products/': typeof AuthenticatedProductsIndexRoute
-  '/roles/': typeof AuthenticatedRolesIndexRoute
+  '/region-links/': typeof AuthenticatedRegionLinksIndexRoute
+  '/typical-layouts/': typeof AuthenticatedTypicalLayoutsIndexRoute
   '/users/': typeof AuthenticatedUsersIndexRoute
-  '/utilities/': typeof AuthenticatedUtilitiesIndexRoute
+  '/utility-premises/': typeof AuthenticatedUtilityPremisesIndexRoute
   '/views/': typeof AuthenticatedViewsIndexRoute
   '/virtual-scenes/': typeof AuthenticatedVirtualScenesIndexRoute
 }
@@ -192,15 +193,15 @@ export interface FileRoutesByTo {
   '/500': typeof errors500Route
   '/503': typeof errors503Route
   '/': typeof AuthenticatedIndexRoute
-  '/contacts': typeof AuthenticatedContactsIndexRoute
-  '/locations': typeof AuthenticatedLocationsIndexRoute
-  '/management-contents': typeof AuthenticatedManagementContentsIndexRoute
+  '/apartment-interiors': typeof AuthenticatedApartmentInteriorsIndexRoute
+  '/floor-plan': typeof AuthenticatedFloorPlanIndexRoute
+  '/other-info': typeof AuthenticatedOtherInfoIndexRoute
   '/overviews': typeof AuthenticatedOverviewsIndexRoute
   '/permissions': typeof AuthenticatedPermissionsIndexRoute
-  '/products': typeof AuthenticatedProductsIndexRoute
-  '/roles': typeof AuthenticatedRolesIndexRoute
+  '/region-links': typeof AuthenticatedRegionLinksIndexRoute
+  '/typical-layouts': typeof AuthenticatedTypicalLayoutsIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
-  '/utilities': typeof AuthenticatedUtilitiesIndexRoute
+  '/utility-premises': typeof AuthenticatedUtilityPremisesIndexRoute
   '/views': typeof AuthenticatedViewsIndexRoute
   '/virtual-scenes': typeof AuthenticatedVirtualScenesIndexRoute
 }
@@ -218,15 +219,15 @@ export interface FileRoutesById {
   '/(errors)/500': typeof errors500Route
   '/(errors)/503': typeof errors503Route
   '/_authenticated/': typeof AuthenticatedIndexRoute
-  '/_authenticated/contacts/': typeof AuthenticatedContactsIndexRoute
-  '/_authenticated/locations/': typeof AuthenticatedLocationsIndexRoute
-  '/_authenticated/management-contents/': typeof AuthenticatedManagementContentsIndexRoute
+  '/_authenticated/apartment-interiors/': typeof AuthenticatedApartmentInteriorsIndexRoute
+  '/_authenticated/floor-plan/': typeof AuthenticatedFloorPlanIndexRoute
+  '/_authenticated/other-info/': typeof AuthenticatedOtherInfoIndexRoute
   '/_authenticated/overviews/': typeof AuthenticatedOverviewsIndexRoute
   '/_authenticated/permissions/': typeof AuthenticatedPermissionsIndexRoute
-  '/_authenticated/products/': typeof AuthenticatedProductsIndexRoute
-  '/_authenticated/roles/': typeof AuthenticatedRolesIndexRoute
+  '/_authenticated/region-links/': typeof AuthenticatedRegionLinksIndexRoute
+  '/_authenticated/typical-layouts/': typeof AuthenticatedTypicalLayoutsIndexRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
-  '/_authenticated/utilities/': typeof AuthenticatedUtilitiesIndexRoute
+  '/_authenticated/utility-premises/': typeof AuthenticatedUtilityPremisesIndexRoute
   '/_authenticated/views/': typeof AuthenticatedViewsIndexRoute
   '/_authenticated/virtual-scenes/': typeof AuthenticatedVirtualScenesIndexRoute
 }
@@ -244,15 +245,15 @@ export interface FileRouteTypes {
     | '/404'
     | '/500'
     | '/503'
-    | '/contacts/'
-    | '/locations/'
-    | '/management-contents/'
+    | '/apartment-interiors/'
+    | '/floor-plan/'
+    | '/other-info/'
     | '/overviews/'
     | '/permissions/'
-    | '/products/'
-    | '/roles/'
+    | '/region-links/'
+    | '/typical-layouts/'
     | '/users/'
-    | '/utilities/'
+    | '/utility-premises/'
     | '/views/'
     | '/virtual-scenes/'
   fileRoutesByTo: FileRoutesByTo
@@ -268,15 +269,15 @@ export interface FileRouteTypes {
     | '/500'
     | '/503'
     | '/'
-    | '/contacts'
-    | '/locations'
-    | '/management-contents'
+    | '/apartment-interiors'
+    | '/floor-plan'
+    | '/other-info'
     | '/overviews'
     | '/permissions'
-    | '/products'
-    | '/roles'
+    | '/region-links'
+    | '/typical-layouts'
     | '/users'
-    | '/utilities'
+    | '/utility-premises'
     | '/views'
     | '/virtual-scenes'
   id:
@@ -293,15 +294,15 @@ export interface FileRouteTypes {
     | '/(errors)/500'
     | '/(errors)/503'
     | '/_authenticated/'
-    | '/_authenticated/contacts/'
-    | '/_authenticated/locations/'
-    | '/_authenticated/management-contents/'
+    | '/_authenticated/apartment-interiors/'
+    | '/_authenticated/floor-plan/'
+    | '/_authenticated/other-info/'
     | '/_authenticated/overviews/'
     | '/_authenticated/permissions/'
-    | '/_authenticated/products/'
-    | '/_authenticated/roles/'
+    | '/_authenticated/region-links/'
+    | '/_authenticated/typical-layouts/'
     | '/_authenticated/users/'
-    | '/_authenticated/utilities/'
+    | '/_authenticated/utility-premises/'
     | '/_authenticated/views/'
     | '/_authenticated/virtual-scenes/'
   fileRoutesById: FileRoutesById
@@ -420,11 +421,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedViewsIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/utilities/': {
-      id: '/_authenticated/utilities/'
-      path: '/utilities'
-      fullPath: '/utilities/'
-      preLoaderRoute: typeof AuthenticatedUtilitiesIndexRouteImport
+    '/_authenticated/utility-premises/': {
+      id: '/_authenticated/utility-premises/'
+      path: '/utility-premises'
+      fullPath: '/utility-premises/'
+      preLoaderRoute: typeof AuthenticatedUtilityPremisesIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/users/': {
@@ -434,18 +435,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedUsersIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/roles/': {
-      id: '/_authenticated/roles/'
-      path: '/roles'
-      fullPath: '/roles/'
-      preLoaderRoute: typeof AuthenticatedRolesIndexRouteImport
+    '/_authenticated/typical-layouts/': {
+      id: '/_authenticated/typical-layouts/'
+      path: '/typical-layouts'
+      fullPath: '/typical-layouts/'
+      preLoaderRoute: typeof AuthenticatedTypicalLayoutsIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/products/': {
-      id: '/_authenticated/products/'
-      path: '/products'
-      fullPath: '/products/'
-      preLoaderRoute: typeof AuthenticatedProductsIndexRouteImport
+    '/_authenticated/region-links/': {
+      id: '/_authenticated/region-links/'
+      path: '/region-links'
+      fullPath: '/region-links/'
+      preLoaderRoute: typeof AuthenticatedRegionLinksIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/permissions/': {
@@ -462,25 +463,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOverviewsIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/management-contents/': {
-      id: '/_authenticated/management-contents/'
-      path: '/management-contents'
-      fullPath: '/management-contents/'
-      preLoaderRoute: typeof AuthenticatedManagementContentsIndexRouteImport
+    '/_authenticated/other-info/': {
+      id: '/_authenticated/other-info/'
+      path: '/other-info'
+      fullPath: '/other-info/'
+      preLoaderRoute: typeof AuthenticatedOtherInfoIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/locations/': {
-      id: '/_authenticated/locations/'
-      path: '/locations'
-      fullPath: '/locations/'
-      preLoaderRoute: typeof AuthenticatedLocationsIndexRouteImport
+    '/_authenticated/floor-plan/': {
+      id: '/_authenticated/floor-plan/'
+      path: '/floor-plan'
+      fullPath: '/floor-plan/'
+      preLoaderRoute: typeof AuthenticatedFloorPlanIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/contacts/': {
-      id: '/_authenticated/contacts/'
-      path: '/contacts'
-      fullPath: '/contacts/'
-      preLoaderRoute: typeof AuthenticatedContactsIndexRouteImport
+    '/_authenticated/apartment-interiors/': {
+      id: '/_authenticated/apartment-interiors/'
+      path: '/apartment-interiors'
+      fullPath: '/apartment-interiors/'
+      preLoaderRoute: typeof AuthenticatedApartmentInteriorsIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
   }
@@ -488,31 +489,32 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
-  AuthenticatedContactsIndexRoute: typeof AuthenticatedContactsIndexRoute
-  AuthenticatedLocationsIndexRoute: typeof AuthenticatedLocationsIndexRoute
-  AuthenticatedManagementContentsIndexRoute: typeof AuthenticatedManagementContentsIndexRoute
+  AuthenticatedApartmentInteriorsIndexRoute: typeof AuthenticatedApartmentInteriorsIndexRoute
+  AuthenticatedFloorPlanIndexRoute: typeof AuthenticatedFloorPlanIndexRoute
+  AuthenticatedOtherInfoIndexRoute: typeof AuthenticatedOtherInfoIndexRoute
   AuthenticatedOverviewsIndexRoute: typeof AuthenticatedOverviewsIndexRoute
   AuthenticatedPermissionsIndexRoute: typeof AuthenticatedPermissionsIndexRoute
-  AuthenticatedProductsIndexRoute: typeof AuthenticatedProductsIndexRoute
-  AuthenticatedRolesIndexRoute: typeof AuthenticatedRolesIndexRoute
+  AuthenticatedRegionLinksIndexRoute: typeof AuthenticatedRegionLinksIndexRoute
+  AuthenticatedTypicalLayoutsIndexRoute: typeof AuthenticatedTypicalLayoutsIndexRoute
   AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
-  AuthenticatedUtilitiesIndexRoute: typeof AuthenticatedUtilitiesIndexRoute
+  AuthenticatedUtilityPremisesIndexRoute: typeof AuthenticatedUtilityPremisesIndexRoute
   AuthenticatedViewsIndexRoute: typeof AuthenticatedViewsIndexRoute
   AuthenticatedVirtualScenesIndexRoute: typeof AuthenticatedVirtualScenesIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
-  AuthenticatedContactsIndexRoute: AuthenticatedContactsIndexRoute,
-  AuthenticatedLocationsIndexRoute: AuthenticatedLocationsIndexRoute,
-  AuthenticatedManagementContentsIndexRoute:
-    AuthenticatedManagementContentsIndexRoute,
+  AuthenticatedApartmentInteriorsIndexRoute:
+    AuthenticatedApartmentInteriorsIndexRoute,
+  AuthenticatedFloorPlanIndexRoute: AuthenticatedFloorPlanIndexRoute,
+  AuthenticatedOtherInfoIndexRoute: AuthenticatedOtherInfoIndexRoute,
   AuthenticatedOverviewsIndexRoute: AuthenticatedOverviewsIndexRoute,
   AuthenticatedPermissionsIndexRoute: AuthenticatedPermissionsIndexRoute,
-  AuthenticatedProductsIndexRoute: AuthenticatedProductsIndexRoute,
-  AuthenticatedRolesIndexRoute: AuthenticatedRolesIndexRoute,
+  AuthenticatedRegionLinksIndexRoute: AuthenticatedRegionLinksIndexRoute,
+  AuthenticatedTypicalLayoutsIndexRoute: AuthenticatedTypicalLayoutsIndexRoute,
   AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
-  AuthenticatedUtilitiesIndexRoute: AuthenticatedUtilitiesIndexRoute,
+  AuthenticatedUtilityPremisesIndexRoute:
+    AuthenticatedUtilityPremisesIndexRoute,
   AuthenticatedViewsIndexRoute: AuthenticatedViewsIndexRoute,
   AuthenticatedVirtualScenesIndexRoute: AuthenticatedVirtualScenesIndexRoute,
 }

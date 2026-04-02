@@ -4,10 +4,10 @@ import { faker } from '@faker-js/faker'
 faker.seed(67890)
 
 const roleNames = [
-  { name: 'Superadmin', slug: 'superadmin' },
-  { name: 'Admin', slug: 'admin' },
-  { name: 'Cashier', slug: 'cashier' },
-  { name: 'Manager', slug: 'manager' },
+  { name: 'Superadmin' },
+  { name: 'Admin' },
+  { name: 'Cashier' },
+  { name: 'Manager' },
 ]
 
 export const users = Array.from({ length: 500 }, () => {

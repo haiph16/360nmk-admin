@@ -12,7 +12,7 @@ const virtualScenesSearchSchema = z.object({
 export const Route = createFileRoute('/_authenticated/virtual-scenes/')({
   beforeLoad: async () => {
     if (!hasPermission('virtualscenes.view')) {
-      throw redirect({ to: '/403' })
+      throw redirect({ to: '/sign-in' })
     }
   },
   validateSearch: (search) => virtualScenesSearchSchema.parse(search),
